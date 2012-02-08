@@ -72,7 +72,6 @@ public class ViewLog extends ListActivity {
 				} else { // should be tags case
 					TextView tv = (TextView)view;
 					try {
-						//ArrayList<String> tags = mDbHelper.getTagsAsList(PingsDbAdapter.KEY_ROWID,columnIndex);
 						String t = mDbHelper.fetchTagString(cursor.getLong(columnIndex));
 						tv.setText(t);
 						return true;

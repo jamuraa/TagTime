@@ -278,43 +278,8 @@ public class Export extends Activity {
 
 	@Override
 	protected void onDestroy() {
-		// TODO Auto-generated method stub
 		super.onDestroy();
 		mDb.close();
 	}
 
 }
-//private StringBuilder getLogString() {
-//SimpleDateFormat SDF = new SimpleDateFormat("[yyyy.MM.dd HH:mm:ss EEE]", Locale.getDefault());
-//StringBuilder logfile = new StringBuilder();
-
-//Cursor pings = mDb.fetchAllPings("ASC");
-////TODO debugging
-//if (pings == null) return logfile;
-//startManagingCursor(pings);
-//pings.moveToFirst();
-//if (pings.isAfterLast()) { return logfile.append("No pings yet!"); }
-//long lastPing=0;
-//String tagstr="";
-//String notes="";
-//while (!pings.isAfterLast()) {
-//try {
-//long pt = pings.getLong(pings.getColumnIndexOrThrow(PingsDbAdapter.KEY_PING));
-////get tags
-//String ts = pings.getString(pings.getColumnIndexOrThrow(PingsDbAdapter.KEY_TAG));
-//String ns = pings.getString(pings.getColumnIndexOrThrow(PingsDbAdapter.KEY_NOTES));
-//if (pt != lastPing && lastPing != 0) {
-////write, if not first time, i.e. lp=0
-//logfile.append(lastPing+" "+tagstr+" "+notes+" "+SDF.format(new Date(lastPing*1000))+"\n");		
-//tagstr = "";
-//}
-//lastPing = pt;
-//notes = ns.equals("") ? ns : "("+ns+")";
-//tagstr += ts + " ";
-//} catch (Exception e) {
-//Log.e(TAG,"DB exception: "+e.getMessage());
-//}
-//pings.moveToNext();
-//}
-//return logfile;
-//}
