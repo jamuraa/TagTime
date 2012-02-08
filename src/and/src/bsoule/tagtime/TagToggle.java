@@ -13,7 +13,6 @@ public class TagToggle extends Button {
 	public TagToggle(Context context) {
 		super(context);
 		setChecked(false);
-		//setTextSize(24);
 	}
 	public void setTId(long l) {
 		tagId = l;
