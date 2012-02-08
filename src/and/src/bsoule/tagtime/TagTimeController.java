@@ -13,13 +13,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-public class TPController extends Activity {
+public class TagTimeController extends Activity {
 	private ToggleButton tog;
 	private SharedPreferences mSettings;
 	
 	public static boolean mRunning;
 	public static final String KEY_RUNNING = "running";
-	private static final int DIALOG_NOMOUNT = 0;
 	
 	public static boolean DEBUG = false;
 
@@ -36,17 +35,12 @@ public class TPController extends Activity {
 		tog.setChecked(mRunning);
 		tog.setOnClickListener(mTogListener);
 
-		// TODO: verify that reinstall should be the only time
-		// that mRunning would be stored as "On" without having an alarm set
-		// for the next ping time...
-		//if (mRunning) {
-			Integer stored = Integer.parseInt(mSettings.getString("KEY_APP_VERSION", "-1"));
-			Integer manifest = Integer.parseInt(getText(R.string.app_version).toString());
-			if (stored < manifest || mSettings.getLong(PingService.KEY_NEXT, -1) < 0
-					              || mSettings.getLong(PingService.KEY_SEED, -1) < 0) {
-				startService(new Intent(this, PingService.class));
-			}
-		//}
+		Integer stored = Integer.parseInt(mSettings.getString("KEY_APP_VERSION", "-1"));
+		Integer manifest = Integer.parseInt(getText(R.string.app_version).toString());
+		if (stored < manifest || mSettings.getLong(PingService.KEY_NEXT, -1) < 0
+				              || mSettings.getLong(PingService.KEY_SEED, -1) < 0) {
+			startService(new Intent(this, PingService.class));
+		}
 		
 		TextView view = (TextView) findViewById(R.id.Viewlog);
 		view.setClickable(true);
@@ -106,12 +100,12 @@ public class TPController extends Activity {
 
 			// Perform action on clicks
 			if (tog.isChecked()) {
-				Toast.makeText(TPController.this, "Pings ON", Toast.LENGTH_SHORT).show();
+				Toast.makeText(TagTimeController.this, "Pings ON", Toast.LENGTH_SHORT).show();
 				mRunning = true;
 				editor.putBoolean(KEY_RUNNING, mRunning);
 				setAlarm();
 			} else {
-				Toast.makeText(TPController.this, "Pings OFF", Toast.LENGTH_SHORT).show();
+				Toast.makeText(TagTimeController.this, "Pings OFF", Toast.LENGTH_SHORT).show();
 				mRunning = false;
 				editor.putBoolean(KEY_RUNNING, mRunning);
 				cancelAlarm();
@@ -119,6 +113,4 @@ public class TPController extends Activity {
 			editor.commit();
 		}
 	};
-
-
 }

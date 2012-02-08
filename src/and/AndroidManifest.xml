@@ -7,14 +7,12 @@
 	<uses-permission
 		android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 	<uses-permission android:name="android.permission.WAKE_LOCK" />
-	<uses-permission
-		android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 	
 	<application android:icon="@drawable/tagtime_03"
 		android:label="@string/app_name">
-		<activity android:name=".TPController"
+		<activity android:name=".TagTimeController"
 			android:label="@string/app_name">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
@@ -28,7 +26,7 @@
 		<activity android:name=".Preferences" />
 		
 		<service android:name=".PingService" />
-		<receiver android:name=".TPStartUp" android:enabled="true"
+		<receiver android:name=".TagTimeStartUp" android:enabled="true"
 			android:exported="false" android:label="TagtimeStartUpPingService">
 			<intent-filter>
 				<action

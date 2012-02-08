@@ -24,9 +24,9 @@ import android.util.Log;
 
 
 /* 
- * the Ping service is in charge of maintaining random number
- * generator state on disk, sending ping notifications, and
- * setting ping alarms.
+ * PingService is in charge of maintaining random number
+ * generator state, sending ping notifications, and setting 
+ * ping alarms.
  * 
  */
 
@@ -40,7 +40,6 @@ public class PingService extends Service {
 	private static int PING_NOTES = R.layout.tagtime_editping; 
 	public static final String KEY_NEXT = "nextping";
 	public static final String KEY_SEED = "RNG_seed";
-	private static final long MINTIME = 5*60*1000; 
 	private boolean mNotify;
 
 	private static PingService sInstance = null;
@@ -74,7 +73,7 @@ public class PingService extends Service {
 		//	this.stopSelf();
 		//	return;
 		//}
-		mNotify = mPrefs.getBoolean(TPController.KEY_RUNNING, true);
+		mNotify = mPrefs.getBoolean(TagTimeController.KEY_RUNNING, true);
 
 		NEXT = mPrefs.getLong(KEY_NEXT, -1); 
 		SEED = mPrefs.getLong(KEY_SEED, -1);
@@ -201,8 +200,8 @@ public class PingService extends Service {
 	// TODO: RTC_WAKEUP and appropriate perms into manifest
 	private void setAlarm(long PING) {
 		AlarmManager alarum = (AlarmManager) getSystemService(ALARM_SERVICE);
-		Intent alit = new Intent(this, TPStartUp.class);
-		alit.putExtra("ThisIntentIsTPStartUpClass", true);
+		Intent alit = new Intent(this, TagTimeStartUp.class);
+		alit.putExtra("ThisIntentIsTagTimeStartUpClass", true);
 		alarum.set(AlarmManager.RTC_WAKEUP, PING*1000, 
 				PendingIntent.getBroadcast(this, 0, alit, 0));
 	}
@@ -234,7 +233,7 @@ public class PingService extends Service {
 	//     and so should only be called once per next ping to calculate,
 	//     after calling prevping.
 	public static long nextping(long prev) {
-		if (TPController.DEBUG) return time() + 60;
+		if (TagTimeController.DEBUG) return time() + 60;
 		return Math.max(prev+1, Math.round(prev+exprand())); 
 	}
 
@@ -245,7 +244,7 @@ public class PingService extends Service {
 		// until the next ping is >= t.
 		final int TUES = 1261198800; //some random time more recent than that..
 		final int BOT = 1184083200;  //start at the birth of timepie!
-		long nxt = TPController.DEBUG ? TUES : BOT;  
+		long nxt = TagTimeController.DEBUG ? TUES : BOT;  
 		long lst = nxt;
 		long lstseed = SEED;
 		while(nxt < t) {

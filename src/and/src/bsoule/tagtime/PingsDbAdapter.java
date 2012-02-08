@@ -27,7 +27,7 @@ public class PingsDbAdapter {
 	private DatabaseHelper mDbHelper;
 	private SQLiteDatabase mDb;
 
-	/** Database creation sql statement */
+	/** Database creation SQL statement */
 
 	// a ping is a timestamp with optional notes
 	private static final String CREATE_PINGS =

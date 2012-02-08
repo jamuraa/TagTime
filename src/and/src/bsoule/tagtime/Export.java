@@ -27,10 +27,8 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 
 public class Export extends Activity {
-	public static final String TAG = "TPExport";
+	public static final String TAG = "TagTimeExport";
 	private PingsDbAdapter mDb;
-	private Button mDoSD;
-	private Button mDoEmail;
 
 	//private static final int DIALOG_PROGRESS = 0;
 	private static final int DIALOG_NOMOUNT = 1;
@@ -199,24 +197,6 @@ public class Export extends Activity {
 
 	private void cleanupUnusedTags() {
 		mDb.cleanupUnusedTags();
-	}
-
-	private Dialog progressDialog() {
-		mProgress = new ProgressDialog(Export.this);
-		mProgress.setIcon(R.drawable.alert_dialog_icon);
-		mProgress.setTitle(R.string.saving_log);
-		mProgress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-		mProgress.setButton("Hide", new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int which) {
-				// TODO Just make dialog go away (Do I need to do anything?)
-			}
-		});
-		mProgress.setButton2("Cancel", new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int which) {
-				// TODO Cancel the save	
-			}
-		});
-		return mProgress;
 	}
 
 	private void startEmail() {
